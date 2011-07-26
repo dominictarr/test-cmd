@@ -1,12 +1,13 @@
 { "name": "test-cmd"
-, "version": "0.0.0"
+, "version": "1.0.0"
 , "description": ""
 , "homepage": "http://github.com/dominictarr/test-cmd"
 , "main": "./cmd"
-, "repository": 
+, "repository":
   { "type": "git"
   , "url": "https://github.com/dominictarr/test-cmd.git" }
-, "dependencies": {}
-, "devDependencies": {}
+, "dependencies": {
+    "test-report": "1"
+  }
 , "author": "Dominic Tarr <dominic.tarr@gmail.com> (http://bit.ly/dominictarr)"
 , "scripts": { "test": "meta-test test/*.js" } }
