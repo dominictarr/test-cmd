@@ -1,5 +1,6 @@
 var Reporter = require('test-report')
-
+  , path = require('path')
+  , fs = require('fs')
 //
 // usage 
 // [cmd] test/*.js --file [write report to file] 
@@ -9,14 +10,14 @@ function run (file, loader, adapter, reporter) {
     , failed = false
 
     try{
-      tests = loader (file)
+      tests = loader (path.resolve(file))
     } catch (error) {
       failed = true
       reporter.error(error)
     }
   
     if (adapter && !failed)
-      shutdown = adapter.run(tests, reporter.subreport(files[0]), function () {})
+      shutdown = adapter.run(tests, reporter, function () {})
 
   return shutdown
 }
@@ -39,10 +40,10 @@ function go(adapter) {
   var opts = args(process.argv.slice(2))
     , tests = opts.args
     , reportFile = opts.reportFile 
-    , reporter = new Reporter(process.cwd())
+    , reporter = new Reporter(tests.length ? process.cwd() : tests[0])
     , shutdowns = 
   tests.map(function (file) {
-    return run(file, require, adapter, reporter.subreport(file))
+    return run(file, require, adapter, tests.length ? reporter.subreport(file) : reporter)
   })
 
   process.on('SIGTSTP',function (){
@@ -56,9 +57,10 @@ function go(adapter) {
     //
     shutdowns.forEach(function(e){e()})
     if(reportFile)
-      fs.writeFileSync(reportFile,reporter.report)
-    else
-      console.log(reporter.report)
+      fs.writeFileSync(reportFile,JSON.stringify(reporter.report))
+    else {
+      console.log(require('test-report-view').view(reporter.report))
+    }
   })
 }
 
