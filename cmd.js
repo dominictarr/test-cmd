@@ -40,26 +40,41 @@ function go(adapter) {
   var opts = args(process.argv.slice(2))
     , tests = opts.args
     , reportFile = opts.reportFile 
-    , reporter = new Reporter(tests.length ? process.cwd() : tests[0])
+    , reporter = new Reporter(tests.length > 1 ? process.cwd() : tests[0])
     , shutdowns = 
   tests.map(function (file) {
-    return run(file, require, adapter, tests.length ? reporter.subreport(file) : reporter)
+    return run(file, function(file) {
+        return require(path.resolve(file))
+      }, adapter, tests.length > 1 ? reporter.subreport(file) : reporter)
   })
 
   process.on('SIGTSTP',function (){
     reporter.error(new Error("recieved stop signal due to timeout"))
-    process.exit()
+    //
+    // return error count.
+    //
+    process.exit(reporter.report.failureCount)
   })
 
-  process.on('exit', function (){
+  process.on('exit', function (code){
+  
     //
-    // trust the adapter to catch any thing thrown during shutdown.
-    //
-    shutdowns.forEach(function(e){e()})
-    if(reportFile)
-      fs.writeFileSync(reportFile,JSON.stringify(reporter.report))
-    else {
-      console.log(require('test-report-view').view(reporter.report))
+    //return error count.
+    // check if the code is correct. if it is not, call exit(code)
+    // take care to not cause a stackOverflow
+
+    if(code != reporter.report.failureCount) {
+      process.exit(reporter.report.failureCount)
+    } else {
+      //
+      // trust the adapter to catch any thing thrown during shutdown.
+      //
+      shutdowns.forEach(function(e){e()})
+      if(reportFile)
+        fs.writeFileSync(reportFile,JSON.stringify(reporter.report))
+      else {
+        console.log(require('test-report-view').view(reporter.report))
+      }
     }
   })
 }
