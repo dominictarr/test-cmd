@@ -36,28 +36,28 @@ function args (argv) {
 }
 
 function go(adapter) {
+
   //parse arguments, load files, run command
   var opts = args(process.argv.slice(2))
     , tests = opts.args
     , reportFile = opts.reportFile 
     , reporter = new Reporter(tests.length > 1 ? process.cwd() : tests[0])
-    , shutdowns = 
-  tests.map(function (file) {
-    return run(file, function(file) {
-        return require(path.resolve(file))
-      }, adapter, tests.length > 1 ? reporter.subreport(file) : reporter)
-  })
+    , shutdowns
 
+
+  process.on('SIGINT',function (){
+    reporter.error(new Error("test manualy stopped"))
+    process.exit()
+  })
   process.on('SIGTSTP',function (){
     reporter.error(new Error("recieved stop signal due to timeout"))
     //
     // return error count.
     //
-    process.exit(reporter.report.failureCount)
+    process.exit()
   })
 
-  process.on('exit', function (code){
-  
+  process.on('exit', function (code, signal){
     //
     //return error count.
     // check if the code is correct. if it is not, call exit(code)
@@ -76,6 +76,14 @@ function go(adapter) {
         console.log(require('test-report-view').view(reporter.report))
       }
     }
+  })
+
+    
+  shutdowns = 
+  tests.map(function (file) {
+    return run(file, function(file) {
+        return require(path.resolve(file))
+      }, adapter, tests.length > 1 ? reporter.subreport(file) : reporter)
   })
 }
 
