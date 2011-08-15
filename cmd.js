@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 var Reporter = require('test-report')
   , path = require('path')
   , fs = require('fs')
@@ -43,7 +45,6 @@ function go(adapter) {
     , reportFile = opts.reportFile 
     , reporter = new Reporter(tests.length > 1 ? process.cwd() : tests[0])
     , shutdowns
-
 
   process.on('SIGINT',function (){
     reporter.error(new Error("test manualy stopped"))

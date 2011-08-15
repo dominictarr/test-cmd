@@ -1,6 +1,6 @@
 { "name": "test-cmd"
   , "version": "1.3.0"
-, "description": ""
+, "description": "minimal tooling to create test runner commands"
 , "homepage": "http://github.com/dominictarr/test-cmd"
 , "main": "./cmd"
 , "repository":
@@ -9,6 +9,9 @@
 , "dependencies": {
     "test-report": "1"
   , "test-report-view": "1"
+  }
+, "bin": {
+    "nodetest": "./cmd.js"
   }
 , "author": "Dominic Tarr <dominic.tarr@gmail.com> (http://bit.ly/dominictarr)"
 , "scripts": { "test": "meta-test test/*.js" } }
