@@ -40,8 +40,8 @@ function args (argv) {
 function go(adapter) {
 
   //parse arguments, load files, run command
-  var opts = args(process.argv.slice(2))
-    , tests = opts.args
+  var opts = require('optimist').argv 
+    , tests = opts._ 
     , reportFile = opts.reportFile 
     , reporter = new Reporter(tests.length > 1 ? process.cwd() : tests[0])
     , shutdowns
@@ -90,6 +90,6 @@ function go(adapter) {
 
 exports.run = run
 exports.go = go
-exports.args = args
+//exports.args = args
 
 if(!module.parent) go()
