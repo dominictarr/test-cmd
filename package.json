@@ -1,5 +1,5 @@
 { "name": "test-cmd"
-  , "version": "1.3.0"
+  , "version": "1.4.0"
 , "description": "minimal tooling to create test runner commands"
 , "homepage": "http://github.com/dominictarr/test-cmd"
 , "main": "./cmd"
@@ -10,6 +10,7 @@
     "test-report": "1"
   , "test-report-view": "1"
   , "optimist": "0.2"
+  , "d-utils": "2"
   }
 , "bin": {
     "nodetest": "./cmd.js"

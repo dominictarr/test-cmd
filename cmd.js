@@ -3,15 +3,33 @@
 var Reporter = require('test-report')
   , path = require('path')
   , fs = require('fs')
+  , d = require('d-utils')
+  , opts = d.merge({}, require('optimist').argv)
+  , tests = opts._
+
+  delete opts._
+
 //
 // usage 
-// [cmd] test/*.js --file [write report to file] 
+// [cmd] test/*.js 
+//
+// --reportFile   write report to file
+// --isolate      run each test in separate process]
+// --timeout MS   stop a test if it's taking longer that MS milliseconds]
+//                timeout must be user with --isolate
+//
+
+//
+// TODO: 
+//   * search for tests if no args (*test/*.js) or (./*.js)
+//   * ignore files (defaults to fixtures, helpers)
+//
 
 function run (file, loader, adapter, reporter) {
   var shutdown = function () {}
     , failed = false
-
-    try{
+    , tests
+    try {
       tests = loader (path.resolve(file))
     } catch (error) {
       failed = true
@@ -24,43 +42,40 @@ function run (file, loader, adapter, reporter) {
   return shutdown
 }
 
-function args (argv) {
-  var n
-    , o = {args: []}
-  while(argv.length) {
-    n = argv.shift()
-    if(n == '--reportFile')
-      o.reportFile = argv.shift()
-    else 
-      o.args.push(n)
-  }
-  return o
-}
-
 function go(adapter) {
 
   //parse arguments, load files, run command
-  var opts = require('optimist').argv 
-    , tests = opts._ 
-    , reportFile = opts.reportFile 
+  var reportFile = opts.reportFile || process.env.NODETEST_reportFile
+    , isolate = opts.isolate || process.env.NODETEST_isolate
     , reporter = new Reporter(tests.length > 1 ? process.cwd() : tests[0])
-    , shutdowns
+    , shutdowns = []
+    , isShutdown = false
+  function runShutdown () {
+    if(isShutdown) return
+    isShutdown = true
 
-  process.on('SIGINT',function (){
+    shutdowns.forEach(function (stop) {stop()})
+    if(reportFile)
+      fs.writeFileSync(reportFile, JSON.stringify(reporter.report))
+    else 
+      console.log(require('test-report-view').view(reporter.report))
+      
+    return reporter.report.failureCount
+  }
+
+  process.on('SIGINT', function () {
     reporter.error(new Error("test manualy stopped"))
-    process.exit()
-  })
-  process.on('SIGTSTP',function (){
-    reporter.error(new Error("recieved stop signal due to timeout"))
-    //
-    // return error count.
-    //
-    process.exit()
+    process.exit(runShutdown())
   })
 
-  process.on('exit', function (code, signal){
-    //
-    //return error count.
+  process.on('SIGTSTP', function () {
+    reporter.error(new Error("recieved stop signal due to timeout"))
+    process.exit(runShutdown())
+  })
+
+  process.on('exit', function (code, signal) {
+  
+    // return error count.
     // check if the code is correct. if it is not, call exit(code)
     // take care to not cause a stackOverflow
 
@@ -70,26 +85,51 @@ function go(adapter) {
       //
       // trust the adapter to catch any thing thrown during shutdown.
       //
-      shutdowns.forEach(function(e){e()})
-      if(reportFile)
-        fs.writeFileSync(reportFile,JSON.stringify(reporter.report))
-      else {
-        console.log(require('test-report-view').view(reporter.report))
-      }
+      runShutdown()
     }
   })
-
     
-  shutdowns = 
-  tests.map(function (file) {
-    return run(file, function(file) {
-        return require(path.resolve(file))
-      }, adapter, tests.length > 1 ? reporter.subreport(file) : reporter)
-  })
+  if(isolate && tests.length > 1) {
+    //run same node command again, but with only one test
+    var _cmd = process.argv[1]
+      , ctrl = require('ctrlflow')
+      , started = {}
+
+    ctrl.parallel.map(function (test, callback) {
+      started[test] = true
+      var child = require('./runner').runCP(_cmd, test, opts, function (err, report) {
+        started[test] = false
+        report.name = test
+        reporter.test(report)
+        callback(err, report)
+      })
+      console.log('isolating', test, "in", child.pid)
+    })(tests, function (err) {
+        if(err) reporter.error(err)
+        // the process will exit when the event loop empties
+        // which should be right after this!
+        // if it isn't, something has been left dangling open
+        // or there is a still running timout or interval.
+      })
+
+    shutdowns = [function () {
+      d.map(started, function (notFinished, test) {
+        if(notFinished)
+          reporter.test(test, 'was started but did not finish')
+      })
+    }]
+
+  } else {
+    shutdowns = 
+    tests.map(function (file) {
+      return run(file, function loader(file) {
+          return require(file)
+        }, adapter, tests.length > 1 ? reporter.subreport(file) : reporter)
+    })
+  }
 }
 
 exports.run = run
 exports.go = go
-//exports.args = args
 
 if(!module.parent) go()
