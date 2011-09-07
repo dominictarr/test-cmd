@@ -11,6 +11,7 @@
   , "test-report-view": "1"
   , "optimist": "0.2"
   , "d-utils": "2"
+  , "ctrlflow": "4"
   }
 , "bin": {
     "nodetest": "./cmd.js"
