@@ -4,7 +4,7 @@ var //Reporter = require('test-report')
   , d = require('d-utils')
   , opts = d.merge({}, require('optimist').argv)
   , spawn = require('child_process').spawn
-//  , exec = require('child_process').exec
+  , cp = require('child_process')
   , tests = opts._
 
 function deparse (opts) {
@@ -25,11 +25,36 @@ function exec(args, opts, callback) {
 
   opts.env = d.merge({}, process.env, opts.env || {}, {'NODETEST_reportFile': tmp})
 
-  //this is the only way that is passing the tests properly.
-  //i think that it is something to do with child.kill
-
-  var child = spawn(process.execPath, args, opts)
-    , timer = d.delay(child.kill.bind(child), +(opts.timeout || 30e3))('SIGTSTP')
+  opts = d.merge(opts, {/*killSignal: 'SIGTSTP',*/ timeout: opts.timeout || 30e3})
+  // this is the only way that is passing the tests properly.
+  // i think that it is something to do with child.kill
+  //
+  // yup, https://github.com/joyent/node/blob/v0.4.11/lib/child_process.js#L37
+  // exec starts the command with sh, and that makes the pid wrong, 
+  // so the kill signal does not get sent to the correct process.
+  //
+  // two approches to this, 
+  //   1, post issue, cross fingers
+  //   2, glob the args
+  //   3, sidestep: write test searcher
+  //
+  // find base dir
+  // readdir
+  // filter /test|spec/
+  // if empty(list) ['./']
+  // map list -> join(item,'*.js')
+  // find
+  // ... files
+  //
+  function x(c, f) {
+    var s = 'kill -s SIGKILL ' + c.pid
+    console.log(s)
+    cp.exec(s, f)
+  }
+//  var timeout = 2 //Math.round(+(opts.timeout || 3e3) / 1000)
+//  var child = spawn('/bin/sh', ['-c', [process.execPath, args.join(' '),'& sleep '+timeout+'; kill -s 2 $!'].join(' ')], opts)
+  var child = cp.spawn(process.execPath, args, opts)
+    , timer = d.delay(child.kill.bind(child), +(opts.timeout || 30e3))('SIGTERM')
   
   child.stdout.on('data', function (chunk) {
     out.push(chunk)
@@ -41,7 +66,8 @@ function exec(args, opts, callback) {
     process.stderr.write(chunk)
   })
 
-  child.on('exit', function (code, status) {
+  child.on('exit', function (code, signal) {
+
     clearTimeout(timer)
     var report
     try {
@@ -73,3 +99,4 @@ function runCP (adapter, test, _opts, callback) {
 
 }
 exports.runCP = runCP
+exports.exec = exec

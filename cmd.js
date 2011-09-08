@@ -6,7 +6,7 @@ var Reporter = require('test-report')
   , d = require('d-utils')
   , opts = d.merge({}, require('optimist').argv)
   , tests = opts._
-
+  , ls = require('ls-r')
   delete opts._
 
 //
@@ -74,7 +74,12 @@ function go(adapter) {
     process.exit()
   })
 
-  process.on('exit', function (code, signal) {
+  process.on('SIGTERM', function () {
+    reporter.error(new Error("recieved stop signal due to timeout"))
+    process.exit()
+  })
+
+  process.on('exit', function (code) {
   
     // return error count.
     // check if the code is correct. if it is not, call exit(code)
@@ -82,45 +87,57 @@ function go(adapter) {
     if(!isShutdown)
       process.exit(runShutdown())
   })
-    
-  if(isolate && tests.length > 1) {
-    //run same node command again, but with only one test
-    var _cmd = process.argv[1]
-      , ctrl = require('ctrlflow')
-      , started = {}
+  var lsOpts = {
+        strict: false, 
+        prune: function (file) {
+          return /\/\.git/.exec(file.path) || /node_modules/.exec(file.path)
+        }
+      }
 
-    ctrl.parallel.map(function (test, callback) {
-      started[test] = true
-      var child = require('./runner').runCP(_cmd, test, opts, function (err, report) {
-        started[test] = false
-        report.name = test
-        reporter.test(report)
-        callback(err, report)
-      })
-      console.log('isolating', test, "in", child.pid)
-    })(tests, function (err) {
-        if(err) reporter.error(err, 'strange')
-        // the process will exit when the event loop empties
-        // which should be right after this!
-        // if it isn't, something has been left dangling open
-        // or there is a still running timout or interval.
-      })
+//  console.log('PRE', tests)
+//  tests = d.map(tests, path.resolve) 
+  ls(tests, lsOpts, function (err, tests) {
+    tests = d.filter(tests, /\.js$/)
+//    console.log('POST',tests)
+    if(isolate && tests.length > 1) {
+      //run same node command again, but with only one test
+      var _cmd = process.argv[1]
+        , ctrl = require('ctrlflow')
+        , started = {}
 
-    shutdowns = [function () {
-      d.map(started, function (notFinished, test) {
-        if(notFinished)
-          reporter.test(test, 'was started but did not finish')
-      })
-    }]
+      ctrl.parallel.map(function (test, callback) {
+        started[test] = true
+        var child = require('./runner').runCP(_cmd, test, opts, function (err, report) {
+          started[test] = false
+          report.name = test
+          reporter.test(report)
+          callback(err, report)
+        })
+        console.log('isolating', test, "in", child.pid)
+      })(tests, function (err) {
+          if(err) reporter.error(err, 'strange')
+          // the process will exit when the event loop empties
+          // which should be right after this!
+          // if it isn't, something has been left dangling open
+          // or there is a still running timout or interval.
+        })
 
-  } else {
-    shutdowns = 
-    tests.map(function (file) {
-      return run(file, function loader(file) {
-          return require(file)
-        }, adapter, tests.length > 1 ? reporter.subreport(file) : reporter)
-    })
-  }
+      shutdowns = [function () {
+        d.map(started, function (notFinished, test) {
+          if(notFinished)
+            reporter.test(test, 'was started but did not finish')
+        })
+      }]
+
+    } else {
+      shutdowns = 
+      tests.map(function (file) {
+        return run(file, function loader(file) {
+            return require(file)
+          }, adapter, tests.length > 1 ? reporter.subreport(file) : reporter)
+      })
+    }
+  })
 }
 
 exports.run = run
