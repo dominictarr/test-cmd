@@ -31,14 +31,13 @@ function runCP (adapter, test, _opts, callback) {
 
   child.stdout.on('data', function (chunk) {
     out.push(chunk)
+    process.stdout.write(chunk)
   })
 
   child.stderr.on('data', function (chunk) {
     out.push(chunk)
+    process.stderr.write(chunk)
   })
-
-  child.stdout.pipe(process.stdout, {end: false})
-  child.stderr.pipe(process.stdout, {end: false})
 
   child.on('exit', function (code, status) {
     clearTimeout(timer)

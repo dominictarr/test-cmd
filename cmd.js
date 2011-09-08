@@ -99,7 +99,7 @@ function go(adapter) {
       })
       console.log('isolating', test, "in", child.pid)
     })(tests, function (err) {
-        if(err) reporter.error(err)
+        if(err) reporter.error(err, 'strange')
         // the process will exit when the event loop empties
         // which should be right after this!
         // if it isn't, something has been left dangling open

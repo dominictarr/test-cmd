@@ -1,5 +1,5 @@
 { "name": "test-cmd"
-, "version": "1.4.1"
+, "version": "1.4.2"
 , "description": "minimal tooling to create test runner commands"
 , "homepage": "http://github.com/dominictarr/test-cmd"
 , "main": "./cmd"
@@ -7,7 +7,7 @@
   { "type": "git"
   , "url": "https://github.com/dominictarr/test-cmd.git" }
 , "dependencies": {
-    "test-report": "1"
+    "test-report": "~1.1"
   , "test-report-view": "1"
   , "optimist": "0.2"
   , "d-utils": "2"
