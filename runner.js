@@ -4,6 +4,7 @@ var //Reporter = require('test-report')
   , d = require('d-utils')
   , opts = d.merge({}, require('optimist').argv)
   , spawn = require('child_process').spawn
+//  , exec = require('child_process').exec
   , tests = opts._
 
 function deparse (opts) {
@@ -15,20 +16,21 @@ function deparse (opts) {
   },[])
 }
 
-function runCP (adapter, test, _opts, callback) {
-  if (!callback) callback = _opts, _opts = opts 
+function exec(args, opts, callback) {
+  if(!callback) callback = opts, opts = {}
+  if('string' === typeof args) args = args.split(' ')
 
   var out = []
     , tmp =  '/tmp/isolated_test_' + Math.random()
 
-  _opts = d.merge({reportFile: tmp}, _opts)
+  opts.env = d.merge({}, process.env, opts.env || {}, {'NODETEST_reportFile': tmp})
 
-  var command = [adapter, test].concat(deparse(_opts))
-    , spawnOpts = {cwd: process.cwd()}
+  //this is the only way that is passing the tests properly.
+  //i think that it is something to do with child.kill
 
-  var child = spawn(process.execPath, command, spawnOpts)
-    , timer = d.delay(child.kill.bind(child), +(_opts.timeout || 30e3))('SIGTSTP')
-
+  var child = spawn(process.execPath, args, opts)
+    , timer = d.delay(child.kill.bind(child), +(opts.timeout || 30e3))('SIGTSTP')
+  
   child.stdout.on('data', function (chunk) {
     out.push(chunk)
     process.stdout.write(chunk)
@@ -47,12 +49,27 @@ function runCP (adapter, test, _opts, callback) {
       report = JSON.parse(file)
       fs.unlinkSync(tmp)
     } catch (err) {
-      return callback(err, {name: test, status: 'error', failures: [err], failureCount: 1})
+      return callback(err, {name: args.join(' '), status: 'error', failures: [err], failureCount: 1})
     }
     report.output = out.join('')
     callback(null, report)
   })
 
   return child
+}
+
+function runCP (adapter, test, _opts, callback) {
+  if (!callback) callback = _opts, _opts = opts 
+
+  delete _opts.isolate
+  delete _opts.$0
+  delete _opts.reportFile
+
+  var command = [adapter, test].concat(deparse(_opts))
+    , spawnOpts = {cwd: process.cwd()}
+  var all = (process.execPath + ' ' + command.join(' ')).split(' ')
+
+  return exec(command, spawnOpts, callback)
+
 }
 exports.runCP = runCP
