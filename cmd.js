@@ -96,6 +96,8 @@ function go(adapter) {
 
 //  console.log('PRE', tests)
 //  tests = d.map(tests, path.resolve) 
+  if(!tests.length)
+    tests = [process.cwd()]
   ls(tests, lsOpts, function (err, tests) {
     tests = d.filter(tests, /\.js$/)
 //    console.log('POST',tests)
