@@ -50,6 +50,7 @@ function go(adapter) {
     , reporter = new Reporter(tests.length > 1 ? process.cwd() : tests[0])
     , shutdowns = []
     , isShutdown = false
+    
   function runShutdown () {
     if(isShutdown) return
     isShutdown = true
@@ -65,12 +66,12 @@ function go(adapter) {
 
   process.on('SIGINT', function () {
     reporter.error(new Error("test manualy stopped"))
-    process.exit(runShutdown())
+    process.exit()
   })
 
   process.on('SIGTSTP', function () {
     reporter.error(new Error("recieved stop signal due to timeout"))
-    process.exit(runShutdown())
+    process.exit()
   })
 
   process.on('exit', function (code, signal) {
@@ -78,15 +79,8 @@ function go(adapter) {
     // return error count.
     // check if the code is correct. if it is not, call exit(code)
     // take care to not cause a stackOverflow
-
-    if(code != reporter.report.failureCount) {
-      process.exit(reporter.report.failureCount)
-    } else {
-      //
-      // trust the adapter to catch any thing thrown during shutdown.
-      //
-      runShutdown()
-    }
+    if(!isShutdown)
+      process.exit(runShutdown())
   })
     
   if(isolate && tests.length > 1) {

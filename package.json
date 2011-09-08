@@ -1,5 +1,5 @@
 { "name": "test-cmd"
-  , "version": "1.4.0"
+, "version": "1.4.1"
 , "description": "minimal tooling to create test runner commands"
 , "homepage": "http://github.com/dominictarr/test-cmd"
 , "main": "./cmd"
@@ -11,10 +11,11 @@
   , "test-report-view": "1"
   , "optimist": "0.2"
   , "d-utils": "2"
-  , "ctrlflow": "4"
+  , "ctrlflow": "~4.1"
   }
 , "bin": {
     "nodetest": "./cmd.js"
   }
 , "author": "Dominic Tarr <dominic.tarr@gmail.com> (http://bit.ly/dominictarr)"
-, "scripts": { "test": "meta-test test/*.js" } }
+, "scripts": { "test": "meta-test test/*.js" } 
+}
