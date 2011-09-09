@@ -88,9 +88,9 @@ function go(adapter) {
       process.exit(runShutdown())
   })
   var lsOpts = {
-        strict: false
+        strict: true
       , prune: function (file) {
-          return /\.git|node_modules/.exec(file.path)
+          return /\.git|node_modules/.exec(path.basename(file.path))
         }
       , recursive: opts.recursive || false
       }
@@ -101,7 +101,7 @@ function go(adapter) {
 
   if(!tests.length)
     tests = ['./']
-  console.log('pre',tests)
+  console.log('pre', tests, process.cwd())
   ls(tests, lsOpts, function (err, tests) {
     tests = d.filter(tests, /\.js$/)
     console.log('POST',tests, process.cwd())
