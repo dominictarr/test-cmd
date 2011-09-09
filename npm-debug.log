@@ -1,0 +1,321 @@
+info it worked if it ends with ok
+verbose cli [ 'node', '/usr/local/bin/npm', 'publish' ]
+info using npm@1.0.27
+info using node@v0.4.10
+verbose config file /home/dominic/.npmrc
+verbose config file /usr/local/etc/npmrc
+verbose publish [ '.' ]
+silly testEngine { name: 'test-cmd',
+silly testEngine   version: '1.6.0',
+silly testEngine   description: 'minimal tooling to create test runner commands',
+silly testEngine   homepage: 'http://github.com/dominictarr/test-cmd',
+silly testEngine   main: './cmd',
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/dominictarr/test-cmd.git' },
+silly testEngine   dependencies: 
+silly testEngine    { 'test-report': '~1.1',
+silly testEngine      'test-report-view': '1',
+silly testEngine      optimist: '0.2',
+silly testEngine      'd-utils': '~2.1',
+silly testEngine      ctrlflow: '~4.1',
+silly testEngine      'ls-r': '0' },
+silly testEngine   bin: { nodetest: './cmd.js' },
+silly testEngine   author: 
+silly testEngine    { name: 'Dominic Tarr',
+silly testEngine      email: 'dominic.tarr@gmail.com',
+silly testEngine      url: 'http://bit.ly/dominictarr' },
+silly testEngine   scripts: { test: 'meta-test test/*.js' },
+silly testEngine   _npmJsonOpts: 
+silly testEngine    { file: '/home/dominic/source/dev/test-cmd/package.json',
+silly testEngine      wscript: false,
+silly testEngine      contributors: false,
+silly testEngine      serverjs: false },
+silly testEngine   _id: 'test-cmd@1.6.0',
+silly testEngine   devDependencies: {},
+silly testEngine   engines: { node: '*' },
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.27',
+silly testEngine   _nodeVersion: 'v0.4.10',
+silly testEngine   _defaultsLoaded: true }
+verbose caching /home/dominic/source/dev/test-cmd/package.json
+verbose loadDefaults test-cmd@1.6.0
+info prepublish test-cmd@1.6.0
+verbose cache add [ '.', null ]
+silly cache add: name, spec, args [ undefined, '.', [ '.', null ] ]
+verbose parsed url { pathname: '.', href: '.' }
+silly testEngine { name: 'test-cmd',
+silly testEngine   version: '1.6.0',
+silly testEngine   description: 'minimal tooling to create test runner commands',
+silly testEngine   homepage: 'http://github.com/dominictarr/test-cmd',
+silly testEngine   main: './cmd',
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/dominictarr/test-cmd.git' },
+silly testEngine   dependencies: 
+silly testEngine    { 'test-report': '~1.1',
+silly testEngine      'test-report-view': '1',
+silly testEngine      optimist: '0.2',
+silly testEngine      'd-utils': '~2.1',
+silly testEngine      ctrlflow: '~4.1',
+silly testEngine      'ls-r': '0' },
+silly testEngine   bin: { nodetest: './cmd.js' },
+silly testEngine   author: 
+silly testEngine    { name: 'Dominic Tarr',
+silly testEngine      email: 'dominic.tarr@gmail.com',
+silly testEngine      url: 'http://bit.ly/dominictarr' },
+silly testEngine   scripts: { test: 'meta-test test/*.js' },
+silly testEngine   _npmJsonOpts: 
+silly testEngine    { file: 'package.json',
+silly testEngine      wscript: false,
+silly testEngine      contributors: false,
+silly testEngine      serverjs: false },
+silly testEngine   _id: 'test-cmd@1.6.0',
+silly testEngine   devDependencies: {},
+silly testEngine   engines: { node: '*' },
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.27',
+silly testEngine   _nodeVersion: 'v0.4.10',
+silly testEngine   _defaultsLoaded: true,
+silly testEngine   path: '/home/dominic/source/dev/test-cmd',
+silly testEngine   bundleDependencies: [] }
+verbose caching package.json
+verbose loadDefaults test-cmd@1.6.0
+verbose pack /home/dominic/source/dev/test-cmd /tmp/npm-1315563387810/1315563387810-0.48181590694002807/tmp.tgz
+verbose mkdir (expected) error ENOENT, No such file or directory '/tmp/npm-1315563387810'
+verbose mkdir (expected) error ENOENT, No such file or directory '/tmp/npm-1315563387810/1315563387810-0.48181590694002807'
+verbose mkdir done: /tmp/npm-1315563387810/1315563387810-0.48181590694002807 755
+verbose mkdir'ed /tmp/npm-1315563387810/1315563387810-0.48181590694002807
+verbose tar about to write tar and gzip it.
+silly tar args [ '-cvf',
+silly tar args   '-',
+silly tar args   'test-cmd/.gitmodules',
+silly tar args   'test-cmd/test.js',
+silly tar args   'test-cmd/runner.js',
+silly tar args   'test-cmd/cmd.js',
+silly tar args   'test-cmd/package.json',
+silly tar args   'test-cmd/readme.markdown',
+silly tar args   'test-cmd/.gitignore' ]
+verbose success tar -cvf - <file list elided>
+verbose success gzip "--stdout"
+verbose mkdir (expected) error ENOENT, No such file or directory '/tmp/npm-1315563387810/1315563387810-0.48181590694002807/contents'
+verbose mkdir (expected) error ENOENT, No such file or directory '/tmp/npm-1315563387810/1315563387810-0.48181590694002807/contents/___package.npm'
+verbose mkdir done: /tmp/npm-1315563387810/1315563387810-0.48181590694002807/contents/___package.npm 755
+verbose unpack_ uid, gid [ undefined, undefined ]
+verbose unpackTarget /tmp/npm-1315563387810/1315563387810-0.48181590694002807/contents/package
+silly gunzTarPerm modes [ '755', '644' ]
+verbose success gzip "--decompress" "--stdout" "/tmp/npm-1315563387810/1315563387810-0.48181590694002807/tmp.tgz"
+verbose success tar "-mvxpf" "-" "-o" "-C" "/tmp/npm-1315563387810/1315563387810-0.48181590694002807/contents/___package.npm"
+silly asyncMap in gTP /tmp/npm-1315563387810/1315563387810-0.48181590694002807/contents/___package.npm/test-cmd/
+silly asyncMap in gTP /tmp/npm-1315563387810/1315563387810-0.48181590694002807/contents/___package.npm/test-cmd/.gitmodules
+silly asyncMap in gTP /tmp/npm-1315563387810/1315563387810-0.48181590694002807/contents/___package.npm/test-cmd/test.js
+silly asyncMap in gTP /tmp/npm-1315563387810/1315563387810-0.48181590694002807/contents/___package.npm/test-cmd/runner.js
+silly asyncMap in gTP /tmp/npm-1315563387810/1315563387810-0.48181590694002807/contents/___package.npm/test-cmd/cmd.js
+silly asyncMap in gTP /tmp/npm-1315563387810/1315563387810-0.48181590694002807/contents/___package.npm/test-cmd/package.json
+silly asyncMap in gTP /tmp/npm-1315563387810/1315563387810-0.48181590694002807/contents/___package.npm/test-cmd/readme.markdown
+silly asyncMap in gTP /tmp/npm-1315563387810/1315563387810-0.48181590694002807/contents/___package.npm/test-cmd/.gitignore
+verbose gunzed /tmp/npm-1315563387810/1315563387810-0.48181590694002807/contents/___package.npm/test-cmd
+verbose rm'ed /tmp/npm-1315563387810/1315563387810-0.48181590694002807/contents/package
+verbose renamed [ '/tmp/npm-1315563387810/1315563387810-0.48181590694002807/contents/___package.npm/test-cmd',
+verbose renamed   '/tmp/npm-1315563387810/1315563387810-0.48181590694002807/contents/package' ]
+silly testEngine { name: 'test-cmd',
+silly testEngine   version: '1.6.0',
+silly testEngine   description: 'minimal tooling to create test runner commands',
+silly testEngine   homepage: 'http://github.com/dominictarr/test-cmd',
+silly testEngine   main: './cmd',
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/dominictarr/test-cmd.git' },
+silly testEngine   dependencies: 
+silly testEngine    { 'test-report': '~1.1',
+silly testEngine      'test-report-view': '1',
+silly testEngine      optimist: '0.2',
+silly testEngine      'd-utils': '~2.1',
+silly testEngine      ctrlflow: '~4.1',
+silly testEngine      'ls-r': '0' },
+silly testEngine   bin: { nodetest: './cmd.js' },
+silly testEngine   author: 
+silly testEngine    { name: 'Dominic Tarr',
+silly testEngine      email: 'dominic.tarr@gmail.com',
+silly testEngine      url: 'http://bit.ly/dominictarr' },
+silly testEngine   scripts: { test: 'meta-test test/*.js' },
+silly testEngine   _npmJsonOpts: 
+silly testEngine    { file: '/tmp/npm-1315563387810/1315563387810-0.48181590694002807/contents/package/package.json',
+silly testEngine      wscript: false,
+silly testEngine      contributors: false,
+silly testEngine      serverjs: false },
+silly testEngine   _id: 'test-cmd@1.6.0',
+silly testEngine   devDependencies: {},
+silly testEngine   engines: { node: '*' },
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.27',
+silly testEngine   _nodeVersion: 'v0.4.10',
+silly testEngine   _defaultsLoaded: true,
+silly testEngine   path: '/tmp/npm-1315563387810/1315563387810-0.48181590694002807/contents/package' }
+verbose caching /tmp/npm-1315563387810/1315563387810-0.48181590694002807/contents/package/package.json
+verbose loadDefaults test-cmd@1.6.0
+verbose tarball contents [ 'package' ]
+verbose from cache /tmp/npm-1315563387810/1315563387810-0.48181590694002807/contents/package/package.json
+verbose pack /tmp/npm-1315563387810/1315563387810-0.48181590694002807/contents/package /home/dominic/.npm/test-cmd/1.6.0/package.tgz
+verbose mkdir'ed /home/dominic/.npm/test-cmd/1.6.0
+verbose tar about to write tar and gzip it.
+silly tar args [ '-cvf',
+silly tar args   '-',
+silly tar args   'package/.gitmodules',
+silly tar args   'package/test.js',
+silly tar args   'package/runner.js',
+silly tar args   'package/cmd.js',
+silly tar args   'package/package.json',
+silly tar args   'package/readme.markdown',
+silly tar args   'package/.gitignore' ]
+verbose success tar -cvf - <file list elided>
+verbose success gzip "--stdout"
+verbose mkdir (expected) error ENOENT, No such file or directory '/home/dominic/.npm/test-cmd/1.6.0/___package.npm'
+verbose mkdir done: /home/dominic/.npm/test-cmd/1.6.0/___package.npm 755
+verbose unpack_ uid, gid [ undefined, undefined ]
+verbose unpackTarget /home/dominic/.npm/test-cmd/1.6.0/package
+silly gunzTarPerm modes [ '755', '644' ]
+verbose success gzip "--decompress" "--stdout" "/home/dominic/.npm/test-cmd/1.6.0/package.tgz"
+verbose success tar "-mvxpf" "-" "-o" "-C" "/home/dominic/.npm/test-cmd/1.6.0/___package.npm"
+silly asyncMap in gTP /home/dominic/.npm/test-cmd/1.6.0/___package.npm/package/
+silly asyncMap in gTP /home/dominic/.npm/test-cmd/1.6.0/___package.npm/package/.gitmodules
+silly asyncMap in gTP /home/dominic/.npm/test-cmd/1.6.0/___package.npm/package/test.js
+silly asyncMap in gTP /home/dominic/.npm/test-cmd/1.6.0/___package.npm/package/runner.js
+silly asyncMap in gTP /home/dominic/.npm/test-cmd/1.6.0/___package.npm/package/cmd.js
+silly asyncMap in gTP /home/dominic/.npm/test-cmd/1.6.0/___package.npm/package/package.json
+silly asyncMap in gTP /home/dominic/.npm/test-cmd/1.6.0/___package.npm/package/readme.markdown
+silly asyncMap in gTP /home/dominic/.npm/test-cmd/1.6.0/___package.npm/package/.gitignore
+verbose gunzed /home/dominic/.npm/test-cmd/1.6.0/___package.npm/package
+verbose rm'ed /home/dominic/.npm/test-cmd/1.6.0/package
+verbose renamed [ '/home/dominic/.npm/test-cmd/1.6.0/___package.npm/package',
+verbose renamed   '/home/dominic/.npm/test-cmd/1.6.0/package' ]
+silly testEngine { name: 'test-cmd',
+silly testEngine   version: '1.6.0',
+silly testEngine   description: 'minimal tooling to create test runner commands',
+silly testEngine   homepage: 'http://github.com/dominictarr/test-cmd',
+silly testEngine   main: './cmd',
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/dominictarr/test-cmd.git' },
+silly testEngine   dependencies: 
+silly testEngine    { 'test-report': '~1.1',
+silly testEngine      'test-report-view': '1',
+silly testEngine      optimist: '0.2',
+silly testEngine      'd-utils': '~2.1',
+silly testEngine      ctrlflow: '~4.1',
+silly testEngine      'ls-r': '0' },
+silly testEngine   bin: { nodetest: './cmd.js' },
+silly testEngine   author: 
+silly testEngine    { name: 'Dominic Tarr',
+silly testEngine      email: 'dominic.tarr@gmail.com',
+silly testEngine      url: 'http://bit.ly/dominictarr' },
+silly testEngine   scripts: { test: 'meta-test test/*.js' },
+silly testEngine   _npmJsonOpts: 
+silly testEngine    { file: '/home/dominic/.npm/test-cmd/1.6.0/package/package.json',
+silly testEngine      wscript: false,
+silly testEngine      contributors: false,
+silly testEngine      serverjs: false },
+silly testEngine   _id: 'test-cmd@1.6.0',
+silly testEngine   devDependencies: {},
+silly testEngine   engines: { node: '*' },
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.27',
+silly testEngine   _nodeVersion: 'v0.4.10',
+silly testEngine   _defaultsLoaded: true,
+silly testEngine   dist: 
+silly testEngine    { shasum: 'adfa85f0815c7cd687a5b5e6ef62e1133f905e29',
+silly testEngine      tarball: 'http://registry.npmjs.org/test-cmd/-/test-cmd-1.6.0.tgz' } }
+verbose caching /home/dominic/.npm/test-cmd/1.6.0/package/package.json
+verbose loadDefaults test-cmd@1.6.0
+silly updated sha bytes 3734
+info shasum adfa85f0815c7cd687a5b5e6ef62e1133f905e29
+info shasum /home/dominic/.npm/test-cmd/1.6.0/package.tgz
+verbose from cache /home/dominic/.npm/test-cmd/1.6.0/package/package.json
+verbose chmod /home/dominic/.npm/test-cmd/1.6.0/package.tgz 644
+silly publish { name: 'test-cmd',
+silly publish   version: '1.6.0',
+silly publish   description: 'minimal tooling to create test runner commands',
+silly publish   homepage: 'http://github.com/dominictarr/test-cmd',
+silly publish   main: './cmd',
+silly publish   repository: 
+silly publish    { type: 'git',
+silly publish      url: 'git://github.com/dominictarr/test-cmd.git' },
+silly publish   dependencies: 
+silly publish    { 'test-report': '~1.1',
+silly publish      'test-report-view': '1',
+silly publish      optimist: '0.2',
+silly publish      'd-utils': '~2.1',
+silly publish      ctrlflow: '~4.1',
+silly publish      'ls-r': '0' },
+silly publish   bin: { nodetest: './cmd.js' },
+silly publish   author: 
+silly publish    { name: 'Dominic Tarr',
+silly publish      email: 'dominic.tarr@gmail.com',
+silly publish      url: 'http://bit.ly/dominictarr' },
+silly publish   scripts: { test: 'meta-test test/*.js' },
+silly publish   _npmJsonOpts: 
+silly publish    { file: '/home/dominic/.npm/test-cmd/1.6.0/package/package.json',
+silly publish      wscript: false,
+silly publish      contributors: false,
+silly publish      serverjs: false },
+silly publish   _id: 'test-cmd@1.6.0',
+silly publish   devDependencies: {},
+silly publish   engines: { node: '*' },
+silly publish   _engineSupported: true,
+silly publish   _npmVersion: '1.0.27',
+silly publish   _nodeVersion: 'v0.4.10',
+silly publish   _defaultsLoaded: true,
+silly publish   dist: 
+silly publish    { shasum: 'adfa85f0815c7cd687a5b5e6ef62e1133f905e29',
+silly publish      tarball: 'http://registry.npmjs.org/test-cmd/-/test-cmd-1.6.0.tgz' } }
+verbose PUT test-cmd
+verbose raw, before any munging test-cmd
+verbose url resolving [ 'https://registry.npmjs.org/', './test-cmd' ]
+verbose url resolved https://registry.npmjs.org/test-cmd
+verbose url parsed { protocol: 'https:',
+verbose url parsed   slashes: true,
+verbose url parsed   host: 'registry.npmjs.org',
+verbose url parsed   hostname: 'registry.npmjs.org',
+verbose url parsed   href: 'https://registry.npmjs.org/test-cmd',
+verbose url parsed   pathname: '/test-cmd' }
+silly writing json { _id: 'test-cmd',
+silly writing json   name: 'test-cmd',
+silly writing json   description: 'minimal tooling to create test runner commands',
+silly writing json   'dist-tags': {},
+silly writing json   versions: {},
+silly writing json   maintainers: 
+silly writing json    [ { name: 'dominictarr',
+silly writing json        email: 'dominic.tarr@gmail.com' } ] }
+verbose response https://registry.npmjs.org/test-cmd
+silly chunk {"error":"conflict","reason":"Document update conflict."}
+silly chunk 
+verbose GET test-cmd
+verbose raw, before any munging test-cmd
+verbose url resolving [ 'https://registry.npmjs.org/', './test-cmd' ]
+verbose url resolved https://registry.npmjs.org/test-cmd
+verbose url parsed { protocol: 'https:',
+verbose url parsed   slashes: true,
+verbose url parsed   host: 'registry.npmjs.org',
+verbose url parsed   hostname: 'registry.npmjs.org',
+verbose url parsed   href: 'https://registry.npmjs.org/test-cmd',
+verbose url parsed   pathname: '/test-cmd' }
+verbose response https://registry.npmjs.org/test-cmd
+silly chunk {"_id":"test-cmd","_rev":"33-f04c9518dfe7906ebdc6e67a31940198","name":"test-cmd","description":"minimal tooling to create test runner commands","dist-tags":{"latest":"1.6.0"},"versions":{"1.0.0":{"name":"test-cmd","version":"1.0.0","description":"","homepage":"http://github.com/dominictarr/test-cmd","main":"./cmd","repository":{"type":"git","url":"git://github.com/dominictarr/test-cmd.git"},"dependencies":{"test-report":"1"},"author":{"name":"Dominic Tarr","email":"dominic.tarr@gmail.com","url":"http://bit.ly/dominictarr"},"scripts":{"test":"meta-test test/*.js"},"_npmJsonOpts":{"file":"/home/dominic/.npm/test-cmd/1.0.0/package/package.json","wscript":false,"contributors":false,"serverjs":false},"_id":"test-cmd@1.0.0","devDependencies":{},"engines":{"node":"*"},"_engineSupported":true,"_npmVersion":"1.0.13","_nodeVersion":"v0.4.8","_defaultsLoaded":true,"dist":{"shasum":"d15ba31144e815fa7a627f53ca9b65724e0ec66f","tarball":"http://registry.npmjs.org/test-cmd/-/test-cmd-1.0.0.tgz"},"directories":{}},"1.1.0":{"name":"test-cmd","version":"1.1.0","description":"","homepage":"http://github.com/dominictarr/test-cmd","main":"./cmd","repository":{"type":"git","url":"git://github.com/dominictarr/test-cmd.git"},"dependencies":{"test-report":"1"},"author":{"name":"Dominic Tarr","email":"dominic.tarr@gmail.com","url":"http://bit.ly/dominictarr"},"scripts":{"test":"meta-test test/*.js"},"_npmJsonOpts":{"file":"/home/dominic/.npm/test-cmd/1.1.0/packag
+silly chunk e/package.json","wscript":false,"contributors":false,"serverjs":false},"_id":"test-cmd@1.1.0","devDependencies":{},"engines":{"node":"*"},"_engineSupported":true,"_npmVersion":"1.0.13","_nodeVersion":"v0.4.8","_defaultsLoaded":true,"dist":{"shasum":"d82a301f0b9729acf7fd3c603903085e9d795fb6","tarball":"http://registry.npmjs.org/test-cmd/-/test-cmd-1.1.0.tgz"},"directories":{}},"1.1.1":{"name":"test-cmd","version":"1.1.1","description":"","homepage":"http://github.com/dominictarr/test-cmd","main":"./cmd","repository":{"type":"git","url":"git://github.com/dominictarr/test-cmd.git"},"dependencies":{"test-report":"1","test-report-view":"1"},"author":{"name":"Dominic Tarr","email":"dominic.tarr@gmail.com","url":"http://bit.ly/dominictarr"},"scripts":{"test":"meta-test test/*.js"},"_npmJsonOpts":{"file":"/home/dominic/.npm/test-cmd/1.1.1/package/package.json","wscript":false,"contributors":false,"serverjs":false},"_id":"test-cmd@1.1.1","devDependencies":{},"engines":{"node":"*"},"_engineSupported":true,"_npmVersion":"1.0.13","_nodeVersion":"v0.4.8","_defaultsLoaded":true,"dist":{"shasum":"4b4c60b35d8c6c0a8c4165a23fe2bf0b42b5be0f","tarball":"http://registry.npmjs.org/test-cmd/-/test-cmd-1.1.1.tgz"},"directories":{}},"1.1.2":{"name":"test-cmd","version":"1.1.2","description":"","homepage":"http://github.com/dominictarr/test-cmd","main":"./cmd","repository":{"type":"git","url":"git://github.com/dominictarr/test-cmd.git"},"dependencies":{"test-rep
+silly chunk ort":"1","test-report-view":"1"},"author":{"name":"Dominic Tarr","email":"dominic.tarr@gmail.com","url":"http://bit.ly/dominictarr"},"scripts":{"test":"meta-test test/*.js"},"_npmJsonOpts":{"file":"/home/dominic/.npm/test-cmd/1.1.2/package/package.json","wscript":false,"contributors":false,"serverjs":false},"_id":"test-cmd@1.1.2","devDependencies":{},"engines":{"node":"*"},"_engineSupported":true,"_npmVersion":"1.0.13","_nodeVersion":"v0.4.8","_defaultsLoaded":true,"dist":{"shasum":"1c7168aa9471ebb505c1f889f05f6f8bf2b63ff5","tarball":"http://registry.npmjs.org/test-cmd/-/test-cmd-1.1.2.tgz"},"directories":{}},"1.2.0":{"name":"test-cmd","version":"1.2.0","description":"","homepage":"http://github.com/dominictarr/test-cmd","main":"./cmd","repository":{"type":"git","url":"git://github.com/dominictarr/test-cmd.git"},"dependencies":{"test-report":"1","test-report-view":"1"},"author":{"name":"Dominic Tarr","email":"dominic.tarr@gmail.com","url":"http://bit.ly/dominictarr"},"scripts":{"test":"meta-test test/*.js"},"_npmJsonOpts":{"file":"/home/dominic/.npm/test-cmd/1.2.0/package/package.json","wscript":false,"contributors":false,"serverjs":false},"_id":"test-cmd@1.2.0","devDependencies":{},"engines":{"node":"*"},"_engineSupported":true,"_npmVersion":"1.0.13","_nodeVersion":"v0.4.8","_defaultsLoaded":true,"dist":{"shasum":"d8501de493d3730ff7f589496d4f7ad91a855ed5","tarball":"http://registry.npmjs.org/test-cmd/-/test-cmd-1.2.0.tgz"},"directories
+silly chunk ":{}},"1.3.0":{"name":"test-cmd","version":"1.3.0","description":"","homepage":"http://github.com/dominictarr/test-cmd","main":"./cmd","repository":{"type":"git","url":"git://github.com/dominictarr/test-cmd.git"},"dependencies":{"test-report":"1","test-report-view":"1"},"author":{"name":"Dominic Tarr","email":"dominic.tarr@gmail.com","url":"http://bit.ly/dominictarr"},"scripts":{"test":"meta-test test/*.js"},"_npmJsonOpts":{"file":"/home/dominic/.npm/test-cmd/1.3.0/package/package.json","wscript":false,"contributors":false,"serverjs":false},"_id":"test-cmd@1.3.0","devDependencies":{},"engines":{"node":"*"},"_engineSupported":true,"_npmVersion":"1.0.13","_nodeVersion":"v0.4.10","_defaultsLoaded":true,"dist":{"shasum":"fa5a434584d073dbf2c4f62b06571da3357bd20c","tarball":"http://registry.npmjs.org/test-cmd/-/test-cmd-1.3.0.tgz"},"maintainers":[{"name":"dominictarr","email":"dominic.tarr@gmail.com"}],"directories":{}},"1.4.0":{"name":"test-cmd","version":"1.4.0","description":"minimal tooling to create test runner commands","homepage":"http://github.com/dominictarr/test-cmd","main":"./cmd","repository":{"type":"git","url":"git://github.com/dominictarr/test-cmd.git"},"dependencies":{"test-report":"1","test-report-view":"1","optimist":"0.2","d-utils":"2","ctrlflow":"~4.1"},"bin":{"nodetest":"./cmd.js"},"author":{"name":"Dominic Tarr","email":"dominic.tarr@gmail.com","url":"http://bit.ly/dominictarr"},"scripts":{"test":"meta-test test/*.js"},"
+silly chunk _npmJsonOpts":{"file":"/home/dominic/.npm/test-cmd/1.4.0/package/package.json","wscript":false,"contributors":false,"serverjs":false},"_id":"test-cmd@1.4.0","devDependencies":{},"engines":{"node":"*"},"_engineSupported":true,"_npmVersion":"1.0.27","_nodeVersion":"v0.4.10","_defaultsLoaded":true,"dist":{"shasum":"1cc374ecf163044038b6f1c737d9b84f5ae3bfd4","tarball":"http://registry.npmjs.org/test-cmd/-/test-cmd-1.4.0.tgz"},"maintainers":[{"name":"dominictarr","email":"dominic.tarr@gmail.com"}],"directories":{}},"1.4.2":{"name":"test-cmd","version":"1.4.2","description":"minimal tooling to create test runner commands","homepage":"http://github.com/dominictarr/test-cmd","main":"./cmd","repository":{"type":"git","url":"git://github.com/dominictarr/test-cmd.git"},"dependencies":{"test-report":"~1.1","test-report-view":"1","optimist":"0.2","d-utils":"2","ctrlflow":"~4.1"},"bin":{"nodetest":"./cmd.js"},"author":{"name":"Dominic Tarr","email":"dominic.tarr@gmail.com","url":"http://bit.ly/dominictarr"},"scripts":{"test":"meta-test test/*.js"},"_npmJsonOpts":{"file":"/home/dominic/.npm/test-cmd/1.4.2/package/package.json","wscript":false,"contributors":false,"serverjs":false},"_id":"test-cmd@1.4.2","devDependencies":{},"engines":{"node":"*"},"_engineSupported":true,"_npmVersion":"1.0.27","_nodeVersion":"v0.4.10","_defaultsLoaded":true,"dist":{"shasum":"e582f2e8ca62ef80bfeb945f4f4356bb1fd362a3","tarball":"http://registry.npmjs.org/test-cmd/-/test-c
+silly chunk md-1.4.2.tgz"},"maintainers":[{"name":"dominictarr","email":"dominic.tarr@gmail.com"}],"directories":{}},"1.5.0":{"name":"test-cmd","version":"1.5.0","description":"minimal tooling to create test runner commands","homepage":"http://github.com/dominictarr/test-cmd","main":"./cmd","repository":{"type":"git","url":"git://github.com/dominictarr/test-cmd.git"},"dependencies":{"test-report":"~1.1","test-report-view":"1","optimist":"0.2","d-utils":"~2.1","ctrlflow":"~4.1","ls-r":"0"},"bin":{"nodetest":"./cmd.js"},"author":{"name":"Dominic Tarr","email":"dominic.tarr@gmail.com","url":"http://bit.ly/dominictarr"},"scripts":{"test":"meta-test test/*.js"},"_npmJsonOpts":{"file":"/home/dominic/.npm/test-cmd/1.5.0/package/package.json","wscript":false,"contributors":false,"serverjs":false},"_id":"test-cmd@1.5.0","devDependencies":{},"engines":{"node":"*"},"_engineSupported":true,"_npmVersion":"1.0.27","_nodeVersion":"v0.4.10","_defaultsLoaded":true,"dist":{"shasum":"621d1422173c338afd7dd47c0ebd9c843eb2c90b","tarball":"http://registry.npmjs.org/test-cmd/-/test-cmd-1.5.0.tgz"},"maintainers":[{"name":"dominictarr","email":"dominic.tarr@gmail.com"}],"directories":{}},"1.6.0":{"name":"test-cmd","version":"1.6.0","description":"minimal tooling to create test runner commands","homepage":"http://github.com/dominictarr/test-cmd","main":"./cmd","repository":{"type":"git","url":"git://github.com/dominictarr/test-cmd.git"},"dependencies":{"test-report":"~1.1","test-report-view":"1","optimist":"0.2","d-utils":"~2.1","ctrlflow":"~4.1","ls-r":"0"},"bin":{"nodetest":"./cmd.js"},"author":{"name":"Dominic Tarr","email":"dominic.tarr@gmail.com","url":"http://bit.ly/dominictarr"},"scripts":{"test":"meta-test test/*.js"},"_npmJsonOpts":{"file":"/home/dominic/.npm/test-cmd/1.6.0/package/package.json","wscript":false,"contributors":false,"serverjs":false},"_id":"test-cmd@1.6.0","devDependencies":{},"engines":{"node":"*"},"_engineSupported":true,"_npmVersion":"1.0.27","_nodeVersion":"v0.4.10","_defaultsLoaded":true,"dist":{"shasum":"4e75ca3182ee88e60d4bc7dd3c36f801f9048302","tarball":"http://registry.npmjs.org/test-cmd/-/test-cmd-1.6.0.tgz"},"maintainers":[{"name":"dominictarr","email":"dominic.tarr@gmail.com"}],"directories":{}}},"maintainers":[{"name":"dominictarr","email":"dominic.tarr@gmail.com"}],"time":{"1.0.0":"2011-07-26T11:05:12.132Z","1.1.0":"2011-07-27T10:10:50.459Z","1.1.1":"2011-07-27T10:16:06.970Z","1.1.2":"2011-07-31T09:20:52.073Z","1.2.0":"2011-07-31T09:26:47.200Z","1.3.0":"2011-08-09T10:06:49.825Z","1.4.0":"2011-09-07T23:00:18.843Z","1.4.2":"2011-09-08T01:03:33.970Z","1.5.0":"2011-09-08T14:09:00.531Z","1.6.0":"2011-09-08T14:17:38.996Z"},"author":{"name":"Dominic Tarr","email":"dominic.tarr@gmail.com","url":"http://bit.ly/dominictarr"},"repository":{"type":"git","url":"git://github.com/dominictarr/test-cmd.git"}}
+info Already published test-cmd@1.6.0
+verbose uploading bin dists []
+ERR! publish fail Cannot publish over existing version.
+ERR! publish fail Bump the 'version' field, set the --force flag, or
+ERR! publish fail     npm unpublish 'test-cmd@1.6.0'
+ERR! publish fail and try again
+ERR! 
+ERR! System Linux 2.6.35-30-generic-pae
+ERR! command "node" "/usr/local/bin/npm" "publish"
+ERR! cwd /home/dominic/source/dev/test-cmd
+ERR! node -v v0.4.10
+ERR! npm -v 1.0.27
+verbose exit [ 1, true ]

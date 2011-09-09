@@ -25,7 +25,7 @@ function exec(args, opts, callback) {
 
   opts.env = d.merge({}, process.env, opts.env || {}, {'NODETEST_reportFile': tmp})
 
-  opts = d.merge(opts, {/*killSignal: 'SIGTSTP',*/ timeout: opts.timeout || 30e3})
+  //  opts = d.merge(opts, {/*killSignal: 'SIGTSTP',*/ timeout: opts.timeout || 30e3})
   // this is the only way that is passing the tests properly.
   // i think that it is something to do with child.kill
   //
@@ -90,6 +90,7 @@ function runCP (adapter, test, _opts, callback) {
   delete _opts.isolate
   delete _opts.$0
   delete _opts.reportFile
+  delete _opts.recursive
 
   var command = [adapter, test].concat(deparse(_opts))
     , spawnOpts = {cwd: process.cwd()}

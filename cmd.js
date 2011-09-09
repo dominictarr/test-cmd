@@ -21,8 +21,8 @@ var Reporter = require('test-report')
 
 //
 // TODO: 
-//   * search for tests if no args (*test/*.js) or (./*.js)
 //   * ignore files (defaults to fixtures, helpers)
+//   * function to run tests (adapter, tests, opts, callback) (which can run all the tests in isolation, etc)
 //
 
 function run (file, loader, adapter, reporter) {
@@ -88,19 +88,23 @@ function go(adapter) {
       process.exit(runShutdown())
   })
   var lsOpts = {
-        strict: false, 
-        prune: function (file) {
-          return /\/\.git/.exec(file.path) || /node_modules/.exec(file.path)
+        strict: false
+      , prune: function (file) {
+          return /\.git|node_modules/.exec(file.path)
         }
+      , recursive: opts.recursive || false
       }
 
-//  console.log('PRE', tests)
+
 //  tests = d.map(tests, path.resolve) 
+//  a way to pass in regular expressions to exclude, and sensible defaults, like exclude hidden files, fixtures, node_modules
+
   if(!tests.length)
-    tests = [process.cwd()]
+    tests = ['./']
+  console.log('pre',tests)
   ls(tests, lsOpts, function (err, tests) {
     tests = d.filter(tests, /\.js$/)
-//    console.log('POST',tests)
+    console.log('POST',tests, process.cwd())
     if(isolate && tests.length > 1) {
       //run same node command again, but with only one test
       var _cmd = process.argv[1]
